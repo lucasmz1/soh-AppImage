@@ -22,4 +22,4 @@ More at: [AnyLinux-AppImages](https://pkgforge-dev.github.io/Anylinux-AppImages/
 </details>
 
 --------------------------------------------------
-### NOTE: Requires soh.o2r and oot.o2r oot-mq.o2r inside ./local/share/soh folder. soh.o2r can be downloaded from [here](https://github.com/HarbourMasters/Shipwright/releases/download/9.1.1/SoH-Copper-Bravo-Win64.zip)
+### NOTE: Requires soh.o2r and oot.o2r oot-mq.o2r inside ./local/share/soh folder. soh.o2r can be downloaded and extracted from [here](https://github.com/HarbourMasters/Shipwright/releases/download/9.1.1/SoH-Copper-Bravo-Win64.zip)
