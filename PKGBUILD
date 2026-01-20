@@ -1,13 +1,13 @@
 # Maintainer: AltoXorg <atrl101 AT yahoo DOT com>
 
 _reponame=Shipwright
-_lus_commit=5f4be9b6f5f74917c303ab8b66a0b2f4ef91613d
+_lus_commit=a8bdcab363571038bb71f195f21ec3e9033a220d
 _ZAPDTR_commit=684f21a475dcfeee89938ae1f4afc42768a3e7ef
 _OTRExporter_commit=32e088e28c8cdd055d4bb8f3f219d33ad37963f3
 
 pkgbase=soh
 pkgname=(soh soh-otr-exporter)
-pkgver=9.1.1
+pkgver=9.1.2
 pkgrel=1
 arch=("x86_64" "aarch64")
 url="https://shipofharkinian.com/"
@@ -22,8 +22,8 @@ source=("${_reponame}-${pkgver}.tar.gz::https://github.com/HarbourMasters/${_rep
         "ZAPDTR-${_ZAPDTR_commit:0:8}.tar.gz::https://github.com/HarbourMasters/ZAPDTR/archive/${_ZAPDTR_commit}.tar.gz"
         "OTRExporter-${_OTRExporter_commit:0:8}.tar.gz::https://github.com/HarbourMasters/OTRExporter/archive/${_OTRExporter_commit}.tar.gz"
         "soh.desktop")
-sha256sums=('eab4d5954e4ca53b1a904a5b5faa587e6fc03000b94af8b7d358bf4d49d971c7'
-            '3df918a599a4c6320de36644107075dc9a51eb7bd23130cf8101ceba056fa96d'
+sha256sums=('c8ef222945595f3119dad127f3a0be41b7755a2df519b008f99a2abe5c1ee0bd'
+            '7361e5283faf39747e5eab010a4ae37dbc544bbd9e04d034179fca475f71cbe0'
             '8016f735f9ef4e177384b0e51f243e374bf2f67ba66bdd5d21af8b185aed1635'
             '91a863f8899f2ebfc7868ccad4b5982ae416799c76358ce5b2c0edc11e42a672'
             '7546e95e56f324db6d985ef4e7a4c983171b7cf7bce425bc88c0cecea49dea32')
@@ -31,7 +31,7 @@ sha256sums=('eab4d5954e4ca53b1a904a5b5faa587e6fc03000b94af8b7d358bf4d49d971c7'
 # NOTE: If compiling complains about missing headers, set __generate_headers below to 1
 __generate_headers=0  # Generate OTR (unnecessary) and asset headers. **requires rom**
 
-SHIP_PREFIX=/opt/soh
+#SHIP_PREFIX=/opt/soh
 
 prepare() {
   cd "${srcdir}/${_reponame}-${pkgver}"
@@ -53,7 +53,7 @@ build() {
     -GNinja \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
     -DNON_PORTABLE=On \
-    -DCMAKE_INSTALL_PREFIX=$SHIP_PREFIX \
+    #-DCMAKE_INSTALL_PREFIX=$SHIP_PREFIX \
     -DBUILD_REMOTE_CONTROL=1
 
   cmake --build build --target ZAPD --config $BUILD_TYPE $NINJAFLAGS
@@ -72,7 +72,7 @@ package_soh() {
 
   install -dm755 "${pkgdir}/usr/bin/"
   ln -s "${SHIP_PREFIX}/soh.elf" "${pkgdir}/usr/bin/soh"
-  #install -Dm644 "${srcdir}/${_reponame}-${pkgver}/soh.o2r" "${pkgdir}/usr/bin/soh.o2r"
+  install -Dm644 "${srcdir}/${_reponame}-${pkgver}/soh.o2r" "${pkgdir}/usr/bin/soh.o2r"
   install -Dm644 "${srcdir}/soh.desktop" -t "${pkgdir}/usr/share/applications"
   install -Dm644 soh/macosx/sohIcon.png "${pkgdir}/usr/share/pixmaps/soh.png"
 
